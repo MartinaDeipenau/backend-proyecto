@@ -1,0 +1,19 @@
+body {
+    background-color: #ffe8d6;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h2 {
+    font-family: monospace;
+    color: black;
+}
+
+.card-header {
+    background-color: #ddbea9;
+}
+
+.title {
+    color: black;
+    text-align: center;
+    font-family: monospace;
+}
