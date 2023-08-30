@@ -14,7 +14,8 @@ productsRouters.get('/', getAllProducts)
 
 productsRouters.get('/:id', getProductById)
 
-productsRouters.post('/', auth(['admin, premium']), postNewProduct)
+productsRouters.post('/', postNewProduct)
+//auth(['admin, premium'])
 
 productsRouters.put('/:id', auth(['admin']), putProduct)
 

@@ -56,7 +56,8 @@ const initializePassport = () => {
                             last_name: profile._json.name.split(' ')[1] ?? '',
                             age: 0,
                             email: profile._json.email,
-                            password: 'Github',
+                            password: '',
+                            method : 'github',
                         })
                         const newUserDB = await userModel.create(newUser)
                         return done(null, newUserDB)

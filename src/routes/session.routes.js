@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { login, logout } from '../controllers/session.controller.js'
+import { login, logout, current } from '../controllers/session.controller.js'
 import passport from 'passport'
 
 
@@ -25,4 +25,5 @@ sessionRouter.post('/login',
 
 sessionRouter.get('/logout', logout)
 
+//sessionRouter.get('/current', current)
 export default sessionRouter

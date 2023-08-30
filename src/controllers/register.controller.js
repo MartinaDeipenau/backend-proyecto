@@ -4,22 +4,23 @@ import { transporter } from '../utils/nodemailer.js'
 
 
 export const newUser = async (req, res) => {
-    const { email } = req.body
+    const { first_name, email } = req.body
 
     try {
         const user = await userModel.findOne({ email })
         if (user) {
-            res.json({ menssage: 'User already registered' })
+            res.json({ message: 'User already registered' })
         } else {
             await createUser(req.body)
             await transporter.sendMail({
                 to: email,
-                subject: `Welcome  ${user.first_name}`,
+                subject: `Welcome  ${first_name}`,
                 text: `User  create successfully `,
             })
             res.status(200).redirect('session/login')
         }
     } catch (error) {
-        res.status(500).send('Error in session registering')
+        res.status(500).json({ message: error })
+        console.error(error)
     }
 }

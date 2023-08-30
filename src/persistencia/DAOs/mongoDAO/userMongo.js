@@ -17,6 +17,16 @@ export const getUsersByEmail = async (email) => {
         return error
     }
 }
+
+/*export const deleteUser = async (email) => {
+    try {
+        const deleteUser = await userModel.deleteOne(email)
+        return deleteUser
+    } catch (error){
+        return error
+    }
+}*/
+
 export const getUsersByCustomFilter = async (filter) => {
     try {
         const user = await userModel.findOne(filter)

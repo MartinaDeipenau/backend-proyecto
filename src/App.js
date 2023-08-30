@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import './config/configDB.js'
 import 'dotenv/config' // Para poder implementar dotenv
@@ -117,7 +118,7 @@ app.use('/api/carts', cartsRouters)
 app.use('/api/messages', messagesRouters)
 app.use('/api/session', sessionRouters)
 app.use('/api/register', registerRouter)
-app.use('/api/mockingproducts', mockingProductsRouter)
+//app.use('/api/mockingproducts', mockingProductsRouter)
 app.use('/api/loggerTest', loggerRoutes)
 app.use('/api/resetPass', resetPasswordsRouter)
 app.use('/api/user', userRouter)
