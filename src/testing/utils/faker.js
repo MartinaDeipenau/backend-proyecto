@@ -10,6 +10,6 @@ export const generateProduct = () => {
         category: faker.commerce.department(),
         code: faker.string.uuid(),
         price: faker.commerce.price(),
-        //stock: faker.helpers.rangeToNumber({ min: 0, max: 50 })
+        stock: faker.helpers.rangeToNumber({ min: 0, max: 50 })
     }
 }

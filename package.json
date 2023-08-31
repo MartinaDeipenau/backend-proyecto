@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/App.js"
+    "dev": "nodemon src/App.js",
+    "test": "mocha test/**/*.test.js --file test/setup.test.js --timeout 5000"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +35,9 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   }
 }

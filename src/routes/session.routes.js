@@ -25,5 +25,5 @@ sessionRouter.post('/login',
 
 sessionRouter.get('/logout', logout)
 
-//sessionRouter.get('/current', current)
+sessionRouter.get('/current', current)
 export default sessionRouter

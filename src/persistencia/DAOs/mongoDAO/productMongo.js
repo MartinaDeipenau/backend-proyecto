@@ -64,11 +64,11 @@ export const productDelete = async (id) => {
     }
 }
 
-/*export const deleteProd = async (title) => {
+export const deleteProduct = async (title) => {
     try {
         const deleteProd = await productModel.deleteOne(title)
         return deleteProd
     } catch (error) {
         return error
     }
-}*/
+}

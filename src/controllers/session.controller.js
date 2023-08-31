@@ -2,7 +2,6 @@ import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 import { generateToken } from '../utils/JWTtoken.js'
 import currentUser from '../dto/currentUser.js'
-import { error } from 'winston'
 
 // Login controller
 
@@ -27,5 +26,17 @@ export const logout = async (req, res, next) => {
     } catch (error) {
         console.error(error)
         res.status(500).send('Error attempting logout')
+    }
+}
+
+export const current = async (req, res) => {
+    try {
+        const cookie = req.cookies['myCookie']
+        const user = jwt.verify(cookie, process.env.JWT_SECRET)
+        if (user)
+            return res.send({ status: "success", payload: user })
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ status: "error", message: "Error obteniendo current user" })
     }
 }

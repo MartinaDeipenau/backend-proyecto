@@ -1,4 +1,4 @@
-/*export default class currentUser {
+export default class currentUser {
     constructor(user) {
         this.id = user._id;
         this.first_name = user.first_name;
@@ -8,4 +8,4 @@
         this.role = user.role
         this.cart = user.cart;
     }
-}*/
+}

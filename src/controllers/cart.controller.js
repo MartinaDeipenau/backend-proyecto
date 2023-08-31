@@ -54,7 +54,7 @@ export const addProductToCart = async (req, res) => {
     const pid = req.params.pid
     const { quantity } = req.body
     const cart = await getCart({ _id: cid })
-    //const product = await getProductsById ({ _id: pid })
+    const product = await getProductsById ({ _id: pid })
 
     try {
         if (product._id === undefined || quantity <= 0) {
