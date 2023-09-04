@@ -4,7 +4,7 @@ import { changeRole } from '../persistencia/DAOs/mongoDAO/userMongo.js'
 export const changeUserRole = async (req, res) => {
     const { uid } = req.params
     try {
-        const user = await userModel.dinfById(uid)
+        const user = await userModel.findById(uid)
         user.role = user.role === 'user' ? 'premium' : 'user'
         await user.save()
 

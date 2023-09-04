@@ -66,8 +66,8 @@ export const productDelete = async (id) => {
 
 export const deleteProduct = async (title) => {
     try {
-        const deleteProd = await productModel.deleteOne(title)
-        return deleteProd
+        const deleteProduct = await productModel.deleteOne(title)
+        return deleteProduct
     } catch (error) {
         return error
     }

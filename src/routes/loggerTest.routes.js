@@ -11,7 +11,7 @@ loggerRoutes.get('/'), (req, res) => {
     req.logger.debug('Debug ONLY FOR DEV')
 
     res.send({
-        Message: 'Testing logger in production for more logger info switch to dev',
+        Message: 'Probando registrar en producción, para obtener más infomración del registro, cambie a desarrollo',
     })
 }
 

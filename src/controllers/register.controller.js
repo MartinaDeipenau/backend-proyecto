@@ -9,13 +9,13 @@ export const newUser = async (req, res) => {
     try {
         const user = await userModel.findOne({ email })
         if (user) {
-            res.json({ message: 'User already registered' })
+            res.json({ message: 'Usuario ya registrado' })
         } else {
             await createUser(req.body)
             await transporter.sendMail({
                 to: email,
                 subject: `Welcome  ${first_name}`,
-                text: `User  create successfully `,
+                text: `Usuario creado con éxito`,
             })
             res.status(200).redirect('session/login')
         }

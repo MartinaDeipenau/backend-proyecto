@@ -19,8 +19,6 @@ export class ProductManager {
 
         product.id = ProductManager.increment()
 
-        //Verifico campos obligatorios
-
         if (
             !product.title ||
             !product.description ||
@@ -30,13 +28,13 @@ export class ProductManager {
             !product.code ||
             !product.stock
         ) {
-            return console.log('required properties')
+            return console.log('Debe proporcionar todas las propiedades requeridas')
         }
 
         const validCode = this.products.find((ele) => ele.code === product.code)
 
         if (validCode) {
-            return console.log('Producto existente')
+            return console.log('El producto ya existe')
         }
 
         this.products.push(product)
@@ -58,7 +56,7 @@ export class ProductManager {
         this.products = JSON.parse(productTXT)
 
         const productByid = this.products.find((prod) => prod.id === parseInt(id))
-        const result = productByid !== undefined ? productByid : 'Product not found'
+        const result = productByid !== undefined ? productByid : 'Producto no encontrado'
         return result
     }
 
@@ -87,9 +85,9 @@ export class ProductManager {
 
             await fs.writeFile(this.path, JSON.stringify(this.products))
 
-            return 'Product successfully'
+            return 'Producto actualizado exitosamente'
         } else {
-            return 'Product not found'
+            return 'Producto no encontrado'
         }
     }
 
@@ -103,7 +101,7 @@ export class ProductManager {
 
         await fs.writeFile(this.path, JSON.stringify(this.products))
 
-        return 'Product deleted'
+        return 'Producto eliminado'
     }
 }
 

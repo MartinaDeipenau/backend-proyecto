@@ -17,7 +17,7 @@ messagesRouters.get('/', auth(['user']), async (req, res) => {
     res.render('messages')
   } catch (error) {
     console.log(error)
-    res.status(500).send('Error getting messages')
+    res.status(500).send('Error al recibir mensajes')
   }
 })
 

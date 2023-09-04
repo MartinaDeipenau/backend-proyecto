@@ -13,22 +13,22 @@ import {
 
 export const getAllProducts = async (req, res) => {
     try {
-        const currentUser = {
-            first_name: req.user.first_name,
-            last_name: req.user.last_name,
-            age: req.user.age,
-            email: req.user.email,
-            role: req.user.role,
-            cart: req.user.cart,
-        }
+        //const currentUser = {
+        //   first_name: req.user.first_name,
+        //  last_name: req.user.last_name,
+        //    age: req.user.age,
+        //    email: req.user.email,
+        //    role: req.user.role,
+        //    cart: req.user.cart,
+        //}
         const product = await getProducts(req.query)
         res.render('home', {
             products: product.docs,
-            user: currentUser
+            //user: currentUser
         })
         //{docs: products} prods sin meta data
     } catch (error) {
-        res.status(500).send('Error getting prods')
+        res.status(500).send('Error al obtener productos')
     }
 }
 
@@ -44,7 +44,7 @@ export const getProductById = async (req, res) => {
             thumbnail: product.thumbnail,
         })
     } catch (error) {
-        return res.status(500).send('Error getting prods')
+        return res.status(500).send('Error al obtener productos')
     }
 }
 
@@ -64,7 +64,7 @@ export const postNewProduct = async (req, res, next) => {
     try {
         if (!title || !description || !price || !category || !code || !stock) {
             CustomError.createError({
-                name: 'Product creation error',
+                name: 'Error al crear producto',
                 cause: generateErrorAddProduct({
                     title,
                     description,
@@ -73,7 +73,7 @@ export const postNewProduct = async (req, res, next) => {
                     code,
                     stock,
                 }),
-                message: 'Error trying to create a new product',
+                message: 'Error al crear el producto',
                 code: EErrors.INVALID_TYPES_ERROR,
             })
         }
@@ -81,7 +81,7 @@ export const postNewProduct = async (req, res, next) => {
 
         await createProduct(req.body)
 
-        res.status(200).send('Product added successfully')
+        res.status(200).send('Producto agregado exitosamente')
     } catch (error) {
         next(error)
     }
@@ -107,7 +107,7 @@ export const putProduct = async (req, res) => {
         const productUpdate = await updateProduct(id, obj)
         res.status(200).send(productUpdate)
     } catch (error) {
-        res.status(500).send('Error updating product')
+        res.status(500).send('Error al actualizar producto')
     }
 }
 
@@ -116,17 +116,15 @@ export const deleteProduct = async (req, res) => {
     const product = await getProductsById(id)
     // console.log(product)
     // console.log(req.user)
-    
+
     try {
         if (req.user.email !== product.owner || product.owner !== 'admin') {
-            throw new Error('Unauthorized')
+            throw new Error('No autorizado para eliminar producto')
         }
-
-
         await productDelete(id)
 
-        res.status(200).send('Product deleted successfully')
+        res.status(200).send('Producto eliminado exitosamente')
     } catch (error) {
-        res.status(500).send('Error deleting product')
+        res.status(500).send('Error al eliminar el producto')
     }
 }

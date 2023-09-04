@@ -22,14 +22,14 @@ export class CartsManager {
 
     carts.push(cart)
     await fs.writeFile(this.path, JSON.stringify(carts))
-    return 'Cart created'
+    return 'Carrito creado'
   }
 
   async getCartById(id) {
     const cartTxt = await fs.readFile(this.path, 'utf-8')
     const carts = JSON.parse(cartTxt)
     const cartByid = carts.find((cart) => cart.id === parseInt(id))
-    const result = cartByid !== undefined ? cartByid : 'Not found'
+    const result = cartByid !== undefined ? cartByid : 'Carrito no encontrado'
 
     return result
   }
@@ -37,8 +37,8 @@ export class CartsManager {
   async addProductToCart(cid, pid, { quantity }) {
     const cartTxt = await fs.readFile(this.path, 'utf-8')
     const carts = JSON.parse(cartTxt)
-    const cartByid = carts.find((cart) => cart.id === parseInt(cid)) 
-    const products = cartByid.products 
+    const cartByid = carts.find((cart) => cart.id === parseInt(cid))
+    const products = cartByid.products
 
     const productIndex = products.findIndex(
       (prod) => prod.product === parseInt(pid)

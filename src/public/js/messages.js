@@ -17,11 +17,11 @@ function renderMessages() {
 if (chatStart) {
   chatS.addEventListener('click', () => {
     Swal.fire({
-      title: 'Identification',
-      input: 'text',
-      text: 'Add user name',
+      title: 'Identificación',
+      input: 'Texto',
+      text: 'Agregar nombre de usuario',
       inputValidator: (value) => {
-        return !value && 'User name is required'
+        return !value && 'Se requiere nombre de usuario'
       },
       allowOutsideClick: false,
     }).then((result) => {

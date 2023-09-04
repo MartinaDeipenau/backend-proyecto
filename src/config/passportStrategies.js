@@ -45,7 +45,7 @@ const initializePassport = () => {
             {
                 clientID: 'Iv1.00e76cd60a4f4244',
                 clientSecret: process.env.GITHUB_SECRET,
-                callbackURL: "http://localhost:4000/api/register/github",
+                callbackURL: 'http://localhost:4000/api/register/githubcallback',
             },
             async (accessToken, refreshToken, profile, done) => {
                 try {
@@ -57,7 +57,7 @@ const initializePassport = () => {
                             age: 0,
                             email: profile._json.email,
                             password: '',
-                            method : 'github',
+                            method: 'github',
                         })
                         const newUserDB = await userModel.create(newUser)
                         return done(null, newUserDB)
@@ -65,7 +65,7 @@ const initializePassport = () => {
                         return done(null, user)
                     }
                 } catch (error) {
-                    return done('Error', +error)
+                    return done('Error al intentar iniciar sesión con Github', +error)
                 }
             }
         )

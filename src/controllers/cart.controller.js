@@ -17,7 +17,7 @@ export const createCart = async (res, req) => {
         const cart = await newCart()
         res.status(200).send(cart)
     } catch (error) {
-        res.status(500).send('Error creating cart')
+        res.status(500).send('Error al crear carrito')
     }
 }
 
@@ -29,7 +29,7 @@ export const getProducFromCart = async (req, res) => {
         const products = await getCart({ _id: cid })
         res.status(200).send(products)
     } catch (error) {
-        res.status(500).send('Error getting products from cart')
+        res.status(500).send('Error al obtener productos del carrito')
     }
 }
 
@@ -44,7 +44,7 @@ export const deleteAllProducsFromCart = async (req, res) => {
 
         res.status(200).send(cart)
     } catch (error) {
-        res.status(500).send('Error deleteting products from cart')
+        res.status(500).send('Error al eliminar productos del carrito')
     }
 }
 
@@ -77,7 +77,7 @@ export const addProductToCart = async (req, res) => {
 
         await updateCart({ _id: cid }, cart)
 
-        res.status(200).send('Product added to cart')
+        res.status(200).send('Producto agregado al carrito')
     } catch (error) {
         next(error)
     }
@@ -100,12 +100,11 @@ export const updateQuantity = async (req, res) => {
 
         await updateCart({ _id: cid }, { products: updateProduct })
 
-        res.status(200).send('Updated product quantities successfully')
+        res.status(200).send('Cantidades de productos actualizadas correctamente')
     } catch (error) {
-        res.status(500).send('Error updating product quantities' + error)
+        res.status(500).send('Error al actualizar las cantidades de productos' + error)
     }
 }
-//delete one product of cart
 
 export const deleteProductFromCart = async (req, res) => {
     const cid = req.params.cid
@@ -115,21 +114,17 @@ export const deleteProductFromCart = async (req, res) => {
     try {
         const productUpdate = cart.products
 
-
-
         const productIndex = productUpdate.findIndex(
             (prod) => prod.id_product == pid
         )
-
-
 
         productUpdate.splice(productIndex, 1)
 
         await updateCart({ _id: cid }, { products: productUpdate })
 
-        res.status(200).send('Product removed successfully')
+        res.status(200).send('Producto eliminado exitosamente')
     } catch (error) {
-        res.status(500).send('Error removing product' + error)
+        res.status(500).send('Error al eliminar el producto' + error)
     }
 }
 
@@ -179,9 +174,9 @@ export const generatePucharse = async (req, res) => {
 
             res.status(200).send(productWithoutStock)
         } else {
-            console.log('User no auth')
+            console.log('Usuario sin autenticación')
         }
-    } catch (err) {
-        res.status(500).send('Erro generating order' + err)
+    } catch (error) {
+        res.status(500).send('Error al generar la orden' + error)
     }
 }

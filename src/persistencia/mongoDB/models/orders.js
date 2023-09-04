@@ -8,7 +8,7 @@ const orderSchema = new Schema({
     },
     purchase_datetime: {
         type: Date,
-        default: Date.now,
+        default: Date.now
     },
     amount: {
         type: Number,
@@ -18,18 +18,6 @@ const orderSchema = new Schema({
         type: String,
         require: true
     },
-    products: {
-        type: [
-            {
-                _id: false,
-                id_prod: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'products',
-                },
-                quantity: Number,
-            }
-        ]
-    }
 })
 
 export const orderModel = model('orders', orderSchema)

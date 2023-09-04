@@ -28,14 +28,14 @@ const productSchema = new Schema({
   },
   code: {
     type: String,
-    unique: true
+    required: true
   },
   stock: {
     type: Number,
     required: true
   },
   owner: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'users',
     default: 'admin'
   },

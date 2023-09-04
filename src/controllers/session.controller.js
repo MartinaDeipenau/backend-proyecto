@@ -7,13 +7,13 @@ import currentUser from '../dto/currentUser.js'
 
 export const login = async (req, res) => {
     try {
-        if (!req.user) return res.status(400).send('Error user' + error)
+        if (!req.user) return res.status(400).send('Error al cargar usuario' + error)
         const user = new currentUser(req.user)
         const token = generateToken(user)
         res.cookie('myCookie', token, { maxAge: 2500000, httpOnly: true }).redirect('/api/products')
     } catch (error) {
         console.error(error)
-        res.status(401).send('Error login')
+        res.status(401).send('Error al intentar iniciar sesión')
     }
 }
 
@@ -25,7 +25,7 @@ export const logout = async (req, res, next) => {
         res.redirect('login')
     } catch (error) {
         console.error(error)
-        res.status(500).send('Error attempting logout')
+        res.status(500).send('Error al intentar cerrar sesión')
     }
 }
 

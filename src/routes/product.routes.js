@@ -19,6 +19,7 @@ productsRouters.post('/', postNewProduct)
 
 productsRouters.put('/:id', auth(['admin']), putProduct)
 
-productsRouters.delete('/:id', auth(['admin']), deleteProduct)
+productsRouters.delete('/:id', deleteProduct)
+//, auth(['admin'])
 
 export default productsRouters

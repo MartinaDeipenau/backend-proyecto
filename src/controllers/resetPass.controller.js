@@ -13,17 +13,17 @@ export const generatelink = async (req, res) => {
 
     try {
         if (!user) {
-            res.json({ message: `User with email : ${email} not found` })
+            res.json({ message: `Usuario con correo electrónico : ${email} no encontrado` })
         } else {
             await transporter.sendMail({
                 to: email,
-                subject: `Change password`,
-                text: `Hello, ${user.first_name} please change your password : ${sendLink}`,
+                subject: `Solicitud de cambio de contraseña`,
+                text: `Hola, ${user.first_name} por favor siga el enlace para cambiar la contraseña : ${sendLink}`,
             })
-            res.status(200).send('Mail sent succesfully')
+            res.status(200).send('Correo enviado exitosamente')
         }
     } catch (error) {
-        res.status(500).send('Error retriveing user')
+        res.status(500).send('Error al recuperar usuario')
     }
 }
 
@@ -43,7 +43,7 @@ export const newPass = async (req, res) => {
             const user = await changePassword(userEmail, newPass)
             console.log(user)
 
-            res.status(200).json({ Message: 'New password changed' })
+            res.status(200).json({ Message: 'Nueva contraseña cambiada' })
         } else console.log('Algo anda mal')
     } catch (error) {
         res.send(error)
