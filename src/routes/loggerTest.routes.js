@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const loggerRoutes = Router()
 
-loggerRoutes.get('/'), (req, res) => {
+loggerRoutes.get('/', (req, res) => {
     req.logger.fatal('ERROR fatal PRODUCTION')
     req.logger.error('ERROR in PRODUCTION')
     req.logger.warning('warning PRODUCTION')
@@ -13,6 +13,6 @@ loggerRoutes.get('/'), (req, res) => {
     res.send({
         Message: 'Probando registrar en producción, para obtener más infomración del registro, cambie a desarrollo',
     })
-}
+})
 
 export default loggerRoutes

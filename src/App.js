@@ -17,7 +17,7 @@ import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
 
 import * as path from 'path'
-import { __dirname, __filename } from '../path.js'
+import { __dirname, __filename } from './utils/path.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
 import cookieParser from 'cookie-parser'
@@ -52,7 +52,7 @@ const swaggerOptions = {
             },
         },
     },
-    apis: [`${__dirname}/docs/**/*.yaml`]
+    apis: [`${__dirname}/docs/**/*.yaml`],
 }
 const spec = swaggerJSDoc(swaggerOptions)
 
@@ -63,7 +63,7 @@ app.use(cookieParser(process.env.SIGNED_COOKIES))
 // Configuration session
 
 app.use(
-    session({ // Ssession en mongo atlas
+    session({ // Session en mongo atlas
         store: MongoStore.create({
             mongoUrl: process.env.URL_MONGOOSE,
             mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
@@ -84,13 +84,12 @@ app.use(passport.session())
 
 app.engine('handlebars', engine()) // Voy a trabajar con handlebars
 app.set('view engine', 'handlebars') // Mis vistas son tipo handlebars
-app.set('views', path.join(__dirname, 'src', 'views'))
+app.set('views', path.resolve(__dirname, './views'))
 
 // Middleware
 
 app.use(express.json()) // Me permite ejecutar json en la app
 app.use(express.urlencoded({ extended: true })) // Me permite poder realizar consultas en (req.query)
-// app.use(express.static(path.join(__dirname, 'public')))
 app.use(loggerMiddleware)
 
 app.get('/', (req, res) => {
