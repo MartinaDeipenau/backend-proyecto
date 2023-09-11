@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import express from 'express'
 import './config/configDB.js'
 import 'dotenv/config' // Para poder implementar dotenv
@@ -91,10 +90,6 @@ app.set('views', path.resolve(__dirname, './views'))
 app.use(express.json()) // Me permite ejecutar json en la app
 app.use(express.urlencoded({ extended: true })) // Me permite poder realizar consultas en (req.query)
 app.use(loggerMiddleware)
-
-app.get('/', (req, res) => {
-    res.render('home', { title: 'Pagina de inicio' })
-})
 
 const myServer = app.listen(PORT, () => {
     loggerDev.info(`Server on port ${PORT}`)
