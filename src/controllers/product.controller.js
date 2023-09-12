@@ -13,18 +13,19 @@ import {
 
 export const getAllProducts = async (req, res) => {
     try {
-        const currentUser = {
-            first_name: req.user.first_name,
-            last_name: req.user.last_name,
-            age: req.user.age,
-            email: req.user.email,
-            role: req.user.role,
-            cart: req.user.cart,
-        }
+        //const currentUser = {
+        // first_name: req.user.first_name,
+        // last_name: req.user.last_name,
+        // age: req.user.age,
+        // email: req.user.email,
+        // role: req.user.role,
+        // last_connection: req.user.last_connections, 
+        // cart: req.user.cart,
+        // }
         const product = await getProducts(req.query)
         res.render('home', {
             products: product.docs,
-            user: currentUser
+            user: req.session.user
         })
         //{docs: products} prods sin meta data
     } catch (error) {
@@ -115,8 +116,8 @@ export const putProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     const { id } = req.params
     const product = await getProductsById(id)
-    console.log(product)
-    console.log(req.user)
+    // console.log(product)
+    // console.log(req.user)
 
     try {
         if (req.user.email !== product.owner || product.owner !== 'admin') {

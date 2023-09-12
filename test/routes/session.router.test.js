@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import supertest from "supertest";
-import { deleteUser } from '../../src/persistencia/DAOs/mongoDAO/userMongo.js'
-import { request } from "express";
+import { deleteUser } from "../../src/persistencia/DAOs/mongoDAO/userMongo.js"
 
 const requester = supertest('http://localhost:4000')
 

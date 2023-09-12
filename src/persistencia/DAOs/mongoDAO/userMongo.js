@@ -22,7 +22,7 @@ export const deleteUser = async (email) => {
     try {
         const deleteUser = await userModel.deleteOne(email)
         return deleteUser
-    } catch (error){
+    } catch (error) {
         return error
     }
 }
@@ -42,5 +42,18 @@ export const changeRole = async (id, obj) => {
         return newRole
     } catch (error) {
         return error
+    }
+}
+
+export const updateLastConnection = async (id) => {
+    try {
+        const updateUser = await userModel.findByIdAndUpdate(
+            id,
+            { last_connections: Date.now() },
+            { new: true }
+        );
+        return updateUser;
+    } catch (error) {
+        return error;
     }
 }

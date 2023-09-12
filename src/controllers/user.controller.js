@@ -1,5 +1,4 @@
 import { userModel } from '../persistencia/mongoDB/models/user.js'
-import { changeRole } from '../persistencia/DAOs/mongoDAO/userMongo.js'
 
 export const changeUserRole = async (req, res) => {
     const { uid } = req.params

@@ -41,7 +41,7 @@ const swaggerOptions = {
     definition: {
         openapi: '3.1.0',
         info: {
-            title: 'Ecommerce APIs documentation',
+            title: 'Ecommerce APIs',
             description: 'Info product and cart',
             version: '1.0.0',
             contact: {

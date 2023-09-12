@@ -24,12 +24,12 @@ describe('Test product routes', () => {
 
     it('[POST] Crear un nuevo producto en la base de datos', async () => {
         const mockNewProduct = {
-            title: "TestProd",
+            title: "TestProduct",
             description: "Test description",
-            price: 5,
+            price: 1,
             category: "Test category",
             code: "TestCode789",
-            stock: 6
+            stock: 3,
         }
         const response = await requester.post('/api/products').send(mockNewProduct)
         expect(response.statusCode).to.be.eql(200)

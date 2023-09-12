@@ -14,8 +14,8 @@ sessionRouter.get('/login', async (req, res) => {
 sessionRouter.post('/login',
     passport.authenticate('login', {
         passReqToCallback: true,
-        failureRedirect: '/api/errorAttemptingToLogin',
         failureMessage: 'Algo salió mal',
+        failureRedirect: '/api/errorAttemptingToLogin',
     }),
     login
 )

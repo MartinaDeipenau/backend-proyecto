@@ -71,7 +71,7 @@ paths:
           description: Si tiene éxito, devuelva todos los productos
         "500":
           description: Si no tiene éxito, devolver mensaje de error
-              put:
+    put:
       summary: Actualizar propiedades product.quantity en un solo carrito
       tags:
         - Carts
@@ -159,7 +159,7 @@ components:
           id: objectsId(123dewq314)
           product:
               id_product: ref123432 
-              quantiy: 5
+              quantity: 5
   requestsBodies:
     productQuantity:
       type: object 
@@ -168,4 +168,4 @@ components:
           type: number
           description: Product quantity
       example:
-        quantity:: 6
+        quantity: 6
