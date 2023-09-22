@@ -20,30 +20,41 @@ export const generatelink = async (req, res) => {
                 subject: `Solicitud de cambio de contraseña`,
                 text: `Hola, ${user.first_name} por favor siga el enlace para cambiar la contraseña : ${sendLink}`,
             })
-            res.status(200).send('Correo enviado exitosamente')
+            res.status(200).redirect(`/api/session/login`)
         }
     } catch (error) {
         res.status(500).send('Error al recuperar usuario')
     }
 }
 
-export const newPass = async (req, res) => {
-    const { pass } = req.body
+export const checkLink = async (req, res) => {
     const { token } = req.params
+    try {
+        const isValidToken = jwt.verify(token, process.env.JWT_SECRET)
+        if (isValidToken) {
+            res.status(200).render('resetPass', { token })
+        } else
+            res.status(400).render('api/errors/errorslog')
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+export const newPass = async (req, res) => {
+    const { pass, token } = req.body
 
     try {
         const isValidToken = jwt.verify(token, process.env.JWT_SECRET)
         if (isValidToken) {
-            console.log(isValidToken.user)
+            //console.log(isValidToken.user)
 
             const userEmail = { email: isValidToken.user.email }
             const newPass = {
                 password: pass,
             }
             const user = await changePassword(userEmail, newPass)
-            console.log(user)
 
-            res.status(200).json({ Message: 'Nueva contraseña cambiada' })
+            res.status(200).send({ Message: 'Nueva contraseña cambiada' })
         } else console.log('Algo anda mal')
     } catch (error) {
         res.send(error)

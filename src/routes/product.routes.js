@@ -14,11 +14,11 @@ productsRouters.get('/', getAllProducts)
 
 productsRouters.get('/:id', getProductById)
 
-productsRouters.post('/', postNewProduct)
-//auth(['admin, premium'])
-productsRouters.put('/:id', auth(['admin']), putProduct)
+productsRouters.post('/', auth(['admin, premium']), postNewProduct)
 
-productsRouters.delete('/:id', deleteProduct)
-//, auth(['admin, premium'])
+productsRouters.put('/:id', auth(['admin, premium']), putProduct)
+
+productsRouters.delete('/:id', auth(['admin, premium']), deleteProduct)
+
 
 export default productsRouters

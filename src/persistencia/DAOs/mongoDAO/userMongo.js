@@ -57,3 +57,21 @@ export const updateLastConnection = async (id) => {
         return error;
     }
 }
+
+export const getUserById = async (id) => {
+    try {
+        const userById = await userModel.findById({ _id: id })
+        return userById
+    } catch (error) {
+        return error
+    }
+}
+
+export const updateActiveUser = async (filter, update) => {
+    try {
+        const updateActiveUserRequest = await userModel.updateMany(filter, update)
+        return updateActiveUserRequest
+    } catch (error) {
+        return error
+    }
+}

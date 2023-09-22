@@ -1,4 +1,5 @@
 import { v4 as uniqueCodeId } from 'uuid'
+import { transporter } from '../utils/nodemailer'
 import CustomError from '../errors/customError.js'
 import EError from '../errors/enumError.js'
 import { generateErrorAddProductToCart } from '../errors/infoError.js'
@@ -25,9 +26,18 @@ export const createCart = async (res, req) => {
 export const getProducFromCart = async (req, res) => {
     const cid = req.params.cid
 
+    let totalAmount = 0
+
     try {
-        const products = await getCart({ _id: cid })
-        res.status(200).send(products)
+        const products = await getCart(cid, "products.id_product")
+        for (const product of products.products) {
+            const quantity = product.quantity
+            const productId = product.id_product
+            const productData = await getProductsById(productId)
+            const Subtotal = productData.price * quantity
+            totalAmount += Subtotal
+        }
+        res.status(200).render('cart', { cart: products, user: req.session.user, total: totalAmount })
     } catch (error) {
         res.status(500).send('Error al obtener productos del carrito')
     }
@@ -42,7 +52,7 @@ export const deleteAllProducsFromCart = async (req, res) => {
 
         await updateCart({ _id: cid }, cart)
 
-        res.status(200).send(cart)
+        res.status(200).redirect('/api/products')
     } catch (error) {
         res.status(500).send('Error al eliminar productos del carrito')
     }
@@ -54,10 +64,14 @@ export const addProductToCart = async (req, res, next) => {
     const pid = req.params.pid
     const { quantity } = req.body
     const cart = await getCart({ _id: cid })
+    const products = cart.products
+    const productIndex = products.findIndex(
+        (prod) => prod.id_product == pid
+    )
     const product = await getProductsById({ _id: pid })
 
     try {
-        if (product._id === undefined || quantity <= 0) {
+        if (product._id === undefined || quantity <= 0 || quantity === undefined) {
             CustomError.createError({
                 name: 'Error de creacion del producto',
                 cause: generateErrorAddProductToCart({
@@ -67,17 +81,19 @@ export const addProductToCart = async (req, res, next) => {
                 code: EError.INVALID_ARGUMENT
             })
         }
-
-        const Addproducts = {
-            id_product: pid,
-            quantity: quantity,
+        if (productIndex === -1) {
+            const Addproducts = {
+                id_product: pid,
+                quantity: quantity
+            }
+            cart.products.push(Addproducts)
+            await updateCart({ _id: cid }, cart)
+        } else {
+            const newQuanty = products[productIndex].quantity + parseInt(quantity)
+            products[productIndex].quantity = newQuanty
+            await updateCart({ _id: cid }, { products: products })
         }
-
-        cart.products.push(Addproducts)
-
-        await updateCart({ _id: cid }, cart)
-
-        res.status(200).send('Producto agregado al carrito')
+        res.status(200).redirect(`/api/carts/${cid}`)
     } catch (error) {
         next(error)
     }
@@ -100,7 +116,7 @@ export const updateQuantity = async (req, res) => {
 
         await updateCart({ _id: cid }, { products: updateProduct })
 
-        res.status(200).send('Cantidades de productos actualizadas correctamente')
+        res.status(200).redirect(`/api/carts/${cid}`)
     } catch (error) {
         res.status(500).send('Error al actualizar las cantidades de productos' + error)
     }
@@ -122,7 +138,7 @@ export const deleteProductFromCart = async (req, res) => {
 
         await updateCart({ _id: cid }, { products: productUpdate })
 
-        res.status(200).send('Producto eliminado exitosamente')
+        res.status(200).redirect(`/api/carts/${cid}`)
     } catch (error) {
         res.status(500).send('Error al eliminar el producto' + error)
     }
@@ -171,8 +187,19 @@ export const generatePucharse = async (req, res) => {
                 amount: totalAmount,
                 purchaser: user.email,
             })
+            if (user.role != 'admin') {
+                await transporter.sendMail({
+                    to: user.email,
+                    subject: `Recibo de compra`,
+                    text: `
+                    Gracias por tu compra, ${user.first_name}
+                    Número de recibo: ${generateNewOrder.code}
+                    El total de tu compra es de : ${generateNewOrder.amount}
+                    `
+                })
+            }
 
-            res.status(200).send(productWithoutStock)
+            res.status(200).render('purchase', { orders: generateNewOrder })
         } else {
             console.log('Usuario sin autenticación')
         }

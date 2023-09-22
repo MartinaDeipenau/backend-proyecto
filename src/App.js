@@ -3,6 +3,8 @@ import './config/configDB.js'
 import 'dotenv/config' // Para poder implementar dotenv
 import { Server } from 'socket.io'
 import { engine } from 'express-handlebars'
+import methodOverride from 'method-override'
+import { auth } from './middleware/auth.js'
 
 import productsRouters from './routes/product.routes.js'
 import cartsRouters from './routes/carts.routes.js'
@@ -12,6 +14,9 @@ import registerRouter from './routes/register.routes.js'
 import loggerRoutes from './routes/loggerTest.routes.js'
 import resetPasswordsRouter from './routes/resetPassword.routes.js'
 import userRouter from './routes/user.routes.js'
+import unauthorizedRouter from './routes/unauthorized.routes.js'
+import errorsRouter from './routes/errors.routes.js'
+import adminRouter from './routes/admin.routes.js'
 import swaggerJSDoc from 'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
 
@@ -34,6 +39,10 @@ import { loggerMiddleware } from './middleware/logger.js'
 
 const app = express()
 const PORT = 4000
+
+// Use put
+
+app.use(methodOverride('_method'))
 
 // Configuration swagger
 
@@ -81,7 +90,12 @@ app.use(passport.session())
 
 // Configuration handlebars
 
-app.engine('handlebars', engine()) // Voy a trabajar con handlebars
+app.engine('handlebars', engine({
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true
+    },
+})) // Voy a trabajar con handlebars
 app.set('view engine', 'handlebars') // Mis vistas son tipo handlebars
 app.set('views', path.resolve(__dirname, './views'))
 
@@ -106,14 +120,20 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/', express.static(__dirname + '/public'))
+app.get("/", async (req, res) => {
+    res.redirect('/api/products');
+})
 app.use('/api/products', productsRouters)
-app.use('/api/carts', cartsRouters)
+app.use('/api/carts', auth(['admin', 'premium', 'user']), cartsRouters)
 app.use('/api/messages', messagesRouters)
 app.use('/api/session', sessionRouters)
 app.use('/api/register', registerRouter)
 app.use('/api/loggerTest', loggerRoutes)
 app.use('/api/resetPass', resetPasswordsRouter)
 app.use('/api/user', userRouter)
+app.use('/api/admin', adminRouter)
+app.use('/api/errors', errorsRouter)
+app.use('/api/unauthorized', unauthorizedRouter)
 // Ruta para documentación de API usando Swagger
 app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(spec))
 

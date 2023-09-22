@@ -1,5 +1,6 @@
 import CustomError from '../errors/customError.js'
 import EErrors from '../errors/enumError.js'
+import { transporter } from '../utils/nodemailer'
 import { generateErrorAddProduct } from '../errors/infoError.js'
 
 import {
@@ -13,15 +14,6 @@ import {
 
 export const getAllProducts = async (req, res) => {
     try {
-        //const currentUser = {
-        // first_name: req.user.first_name,
-        // last_name: req.user.last_name,
-        // age: req.user.age,
-        // email: req.user.email,
-        // role: req.user.role,
-        // last_connection: req.user.last_connections, 
-        // cart: req.user.cart,
-        // }
         const product = await getProducts(req.query)
         res.render('home', {
             products: product.docs,
@@ -43,7 +35,9 @@ export const getProductById = async (req, res) => {
             title: product.title,
             price: product.price,
             stock: product.stock,
+            pid: product._id,
             thumbnail: product.thumbnail,
+            user: req.session.user
         })
     } catch (error) {
         return res.status(500).send('Error al obtener productos')
@@ -122,6 +116,14 @@ export const deleteProduct = async (req, res) => {
     try {
         if (req.user.email !== product.owner || product.owner !== 'admin') {
             throw new Error('No autorizado para eliminar producto')
+        }
+
+        if (req.user.password === product.owner && req.user.role === 'premium') {
+            await transporter.sendMail({
+                to: req.user.email,
+                subject: `Bienvenido  ${req.user.first_name}`,
+                text: `El producto ${product._id} ha sido eliminado por el administrador`,
+            })
         }
         await productDelete(id)
 

@@ -4,7 +4,8 @@ import { auth } from '../middleware/auth.js'
 
 const messagesRouters = Router()
 
-messagesRouters.get('/', auth(['user']), async (req, res) => {
+messagesRouters.get('/', async (req, res) => {
+  //auth(['user, premium, admin']),
   try {
     req.io.on('connection', async (socket) => {
       console.log('Client connected')

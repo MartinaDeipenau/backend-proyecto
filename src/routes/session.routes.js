@@ -15,7 +15,7 @@ sessionRouter.post('/login',
     passport.authenticate('login', {
         passReqToCallback: true,
         failureMessage: 'Algo salió mal',
-        failureRedirect: '/api/errorAttemptingToLogin',
+        failureRedirect: '/api/errors/errorsLog',
     }),
     login
 )

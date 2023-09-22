@@ -28,7 +28,7 @@ export const logout = async (req, res, next) => {
         res.redirect('login')
     } catch (error) {
         console.error(error)
-        res.status(500).send('Error al intentar cerrar sesión')
+        res.status(500).redirect('/api/errors/errorslog')
     }
 }
 

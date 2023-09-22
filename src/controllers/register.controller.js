@@ -14,7 +14,7 @@ export const newUser = async (req, res) => {
             await createUser(req.body)
             await transporter.sendMail({
                 to: email,
-                subject: `Welcome  ${first_name}`,
+                subject: `Bienvenido  ${first_name}`,
                 text: `Usuario creado con éxito`,
             })
             res.status(200).redirect('session/login')
