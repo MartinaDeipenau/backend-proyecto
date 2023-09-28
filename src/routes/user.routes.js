@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { auth } from '../middleware/auth.js'
 import { changeUserRole, deleteOneUser, deleteAllInactiveUsers, updateActiveAllUsers } from '../controllers/user.controller.js'
 
 const userRouter = Router()

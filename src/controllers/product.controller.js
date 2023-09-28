@@ -1,6 +1,6 @@
 import CustomError from '../errors/customError.js'
 import EErrors from '../errors/enumError.js'
-import { transporter } from '../utils/nodemailer'
+import { transporter } from '../utils/nodemailer.js'
 import { generateErrorAddProduct } from '../errors/infoError.js'
 
 import {

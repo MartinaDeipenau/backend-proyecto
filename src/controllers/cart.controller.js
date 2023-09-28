@@ -1,5 +1,5 @@
 import { v4 as uniqueCodeId } from 'uuid'
-import { transporter } from '../utils/nodemailer'
+import { transporter } from '../utils/nodemailer.js'
 import CustomError from '../errors/customError.js'
 import EError from '../errors/enumError.js'
 import { generateErrorAddProductToCart } from '../errors/infoError.js'

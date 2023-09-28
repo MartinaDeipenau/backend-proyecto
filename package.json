@@ -5,6 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon src/App.js",
     "start": "node src/App.js",
     "test": "mocha test/**/*.test.js --file test/setup.test.js --timeout 5000"
   },

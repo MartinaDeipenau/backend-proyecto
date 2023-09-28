@@ -24,7 +24,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res, next) => {
     try {
         req.session.destroy()
-        await updateLastConnection(req.user._id);
+        await updateLastConnection(req.user._id)
         res.redirect('login')
     } catch (error) {
         console.error(error)
