@@ -12,12 +12,12 @@ export const changeUserRole = async (req, res) => {
             user.role = user.role === 'user' ? 'premium' : 'user'
             await user.save()
 
-            res.status(200).redirect('/api/admin')
+            res.status(200).redirect('/api/admin/')
         } else {
             res.status(401).send({ message: "No podes cambiar el rol del administrador" })
         }
     } catch (error) {
-        res.status(402).send('Error al cambiar el rol de usuario')
+        res.status(401).send('Error al cambiar el rol de usuario')
     }
 }
 

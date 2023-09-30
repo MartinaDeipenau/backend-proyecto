@@ -21,11 +21,11 @@ cartsRouters.get('/:cid', auth(['admin', 'premium', 'user']), getProducFromCart)
 cartsRouters.delete('/:cid', deleteAllProducsFromCart)
 
 cartsRouters.post('/:cid/product/:pid', auth(['admin', 'premium', 'user']), addProductToCart)
-//auth(['user'])
+
 cartsRouters.put('/:cid/product/:pid', updateQuantity)
 
 cartsRouters.delete('/:cid/product/:pid', deleteProductFromCart)
 
-cartsRouters.get('/:cid/purcharse', generatePucharse)
+cartsRouters.post('/:cid/purcharse', generatePucharse)
 
 export default cartsRouters

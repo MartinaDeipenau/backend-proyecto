@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { cartModel } from './carts.js'
 
 const userSchema = new Schema({
     first_name: {
@@ -21,9 +22,25 @@ const userSchema = new Schema({
         type: String,
         default: 'user',
     },
+    documents: {
+        type: [
+            {
+                name: String,
+                reference: String
+            }
+        ]
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
     password: {
         type: String,
         required: true,
+    },
+    last_connections: {
+        type: Date,
+        default: Date.now
     },
     cart: {
         type: Schema.Types.ObjectId,

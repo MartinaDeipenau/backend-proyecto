@@ -59,6 +59,8 @@ export const deleteAllProducsFromCart = async (req, res) => {
 }
 
 
+// add Products and quantity to cart (quantity is required)
+
 export const addProductToCart = async (req, res, next) => {
     const cid = req.params.cid
     const pid = req.params.pid
@@ -66,7 +68,7 @@ export const addProductToCart = async (req, res, next) => {
     const cart = await getCart({ _id: cid })
     const products = cart.products
     const productIndex = products.findIndex(
-        (prod) => prod.id_product == pid
+      (prod) => prod.id_product == pid
     )
     const product = await getProductsById({ _id: pid })
 

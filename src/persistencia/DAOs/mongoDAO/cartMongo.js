@@ -11,7 +11,7 @@ export const newCart = async () => {
 
 export const getCart = async (id) => {
     try {
-        const producsCart = await cartModel.findById(id)
+        const producsCart = await cartModel.findById(id).populate(prop).lean()
         return producsCart
     } catch (error) {
         return error

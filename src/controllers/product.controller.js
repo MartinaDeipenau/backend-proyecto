@@ -110,8 +110,6 @@ export const putProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     const { id } = req.params
     const product = await getProductsById(id)
-    // console.log(product)
-    // console.log(req.user)
 
     try {
         if (req.user.email !== product.owner || product.owner !== 'admin') {

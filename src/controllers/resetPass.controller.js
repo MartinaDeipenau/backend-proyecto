@@ -46,7 +46,6 @@ export const newPass = async (req, res) => {
     try {
         const isValidToken = jwt.verify(token, process.env.JWT_SECRET)
         if (isValidToken) {
-            //console.log(isValidToken.user)
 
             const userEmail = { email: isValidToken.user.email }
             const newPass = {
