@@ -1,10 +1,10 @@
 <div class="container mt-5">
-    <h1 class="text-center">Order Complete</h1>
+    <h1 class="text-center">Orden completada</h1>
     <div class="card p-4">
-        <p><strong>Order Identification:</strong> {{orders.code}}</p>
-        <p><strong>Date:</strong> {{orders.pucharse_datetime}}</p>
-        <p><strong>Total Amount:</strong> €{{orders.amount}}</p>
-        <p><strong>Purchaser:</strong> {{orders.purchaser}}</p>
+        <p><strong>Identificación de la orden:</strong> {{orders.code}}</p>
+        <p><strong>Fecha:</strong> {{orders.pucharse_datetime}}</p>
+        <p><strong>Cantidad total:</strong> €{{orders.amount}}</p>
+        <p><strong>Comprador:</strong> {{orders.purchaser}}</p>
     </div>
     <div class="text-center mt-4">
         <form action="/api/products/" method="get">

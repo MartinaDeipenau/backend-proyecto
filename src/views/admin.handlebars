@@ -1,15 +1,15 @@
 <h1>Admin Panel</h1>
 
-<h2>Admin users</h2>
+<h2>Admin Users</h2>
 
 <div class="card-body pb-0 pt-2">
     <form action="/api/user/updateAllActiveUsers" method="post">
-        <button class="btn btn-outline-primary btn-sm mb-3 px-5" type="submit">Check if users are active</button>
+        <button class="btn btn-outline-primary btn-sm mb-3 px-5" type="submit">Comprobar si los usuarios estan activos</button>
     </form>
 </div>
 <div class="card-body py-0">
     <form action="/api/user/deleteInactiveUsers?_method=DELETE" method="POST">
-        <button class="btn btn-outline-danger btn-sm mb-1  px-5" type="submit">DELETE ALL INACTIVE USERS</button>
+        <button class="btn btn-outline-danger btn-sm mb-1  px-5" type="submit">Eliminar todos los usuarios inactivos</button>
     </form>
 </div>
 <div class="d-flex flex-wrap mt-1">
@@ -37,7 +37,7 @@
             </div>
             <div class="card-body">
                 <form action="/api/user/deleteone/{{_id}}?_method=DELETE" method="POST">
-                    <button class="btn btn-outline-danger btn-sm mb-3 px-5" type="submit">DELETE USER</button>
+                    <button class="btn btn-outline-danger btn-sm mb-3 px-5" type="submit">Eliminar usuario</button>
                 </form>
             </div>
         </div>

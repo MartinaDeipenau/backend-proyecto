@@ -4,18 +4,17 @@
             <div class="card bg-dark text-white" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
                     <div class="mb-md-5 mt-md-4 pb-5">
-                        <h2 class="fw-bold mb-2 text-uppercase">Reset Password</h2>
-                        <p class="text-white-50 mb-5">Enter your new password below:</p>
+                        <h2 class="fw-bold mb-2 text-uppercase">Restablecer contraseña</h2>
+                        <p class="text-white-50 mb-5">Ingrese su nueva contraseña:</p>
                         <form action="/api/resetPass/newPassword" method="post">
                             <!-- Add a hidden field for the token -->
                             <input type="hidden" name="token" value="{{token}}">
                             <div class="form-group">
-                                <label for="password" class=" mb-2">New Password:</label>
+                                <label for="password" class=" mb-2">Nueva contraseña:</label>
                                 <input type="password" class="form-control form-control-lg" id="password" name="pass"
                                     required>
                             </div>
-                            <button type="submit" class="btn btn-outline-light btn-lg mt-3 mb-3 px-5">Change
-                                Password</button>
+                            <button type="submit" class="btn btn-outline-light btn-lg mt-3 mb-3 px-5">Cambiar la contraseña</button>
                         </form>
                     </div>
                 </div>
