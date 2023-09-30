@@ -29,19 +29,18 @@ describe('Test Routes Sessions', () => {
             password: 'lola12345'
         }
         const response = await requester.post('/api/session/login').send(mockUserLogin)
-        const cookieHeaders = response.headers['set-cookie'][0]
+        const cookieHeader = response.headers['set-cookie'][0]
         cookie = {
-            name: cookieHeaders.split('=')[0],
-            value: cookieHeaders.split('=')[1]
+            name: cookieHeader.split('=')[0],
+            value: cookieHeader.split('=')[1]
         }
-        expect(cookieHeaders).to.be.ok
+        expect(cookieHeader).to.be.ok
         expect(cookie.name).to.equal('myCookie')
         expect(cookie.value).to.ok
     })
 
     it('[GET] /api/session/current Sesión acutal', async () => {
         const response = await requester.get('/api/session/current').set('Cookie', [`${cookie.name}=${cookie.value}`])
-        console.log(response.body.payload.user)
         expect(response.body.payload.user.email).to.be.eql('lola@sof')
     })
 })
