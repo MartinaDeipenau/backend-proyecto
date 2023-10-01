@@ -15,13 +15,13 @@
             <div class="card-body gap-2">
                 <form action="/api/carts/{{user.cart}}/product/{{pid}}" method="post">
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-dark btn-sm " type="submit">Add to cart</button>
+                        <button class="btn btn-outline-dark btn-sm " type="submit">Agregar al carrito</button>
                         <input type="number" name="quantity" class="form-control" aria-describedby="button-addon1"
                             required>
                     </div>
                 </form>
                 <form action="/api/products/" method="get">
-                    <button class="btn btn-outline-dark btn-sm mb-3 px-5" type="submit">Back products</button>
+                    <button class="btn btn-outline-dark btn-sm mb-3 px-5" type="submit">Volver a productos</button>
                 </form>
             </div>
         </div>

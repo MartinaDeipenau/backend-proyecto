@@ -15,7 +15,7 @@ function renderMessages() {
   })
 }
 if (chatStart) {
-  chatS.addEventListener('click', () => {
+  chatStart.addEventListener('click', () => {
     Swal.fire({
       title: 'Identificación',
       input: 'Texto',
