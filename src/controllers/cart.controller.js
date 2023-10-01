@@ -196,7 +196,7 @@ export const generatePucharse = async (req, res) => {
                     text: `
                     Gracias por tu compra, ${user.first_name}
                     Número de recibo: ${generateNewOrder.code}
-                    El total de tu compra es de : ${generateNewOrder.amount}
+                    El total de tu compra es de: $ ${generateNewOrder.amount}
                     `
                 })
             }
