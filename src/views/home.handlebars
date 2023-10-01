@@ -2,21 +2,19 @@
     {{#each products}}
     <div class='col-sm-3 mx-2 my-3 r'>
         <div class="card w-100 mt-5">
-            <div class="card-header text-white bg-dark">
+            <div class="card-header text-white bg-pink">
                 {{title}}
             </div>
-            <div class="card-body">
+            <div class="card-body-home">
                 <img src={{thumbnail}}alt="Products img">
                 <br />
                 Price: $ {{price}}
                 <br />
                 Stock : {{stock}}
-            </div>
-            <div class="card-body pb-0 pt-2">
                 <form action="/api/products/{{_id}}" method="get">
-                    <button class="btn btn-outline-primary btn-sm mb-3 px-5" type="submit">Detalles de producto</button>
+                    <button class="btn btn-outline-dark btn-sm mb-3 px-5" type="submit">Ver más</button>
                 </form>
-            </div>
+                </div>
 
         </div>
     </div>

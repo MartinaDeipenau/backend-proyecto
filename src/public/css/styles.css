@@ -3,18 +3,64 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/*h2 {
-    font-family: monospace;
-    color: black;
+
+
+.navbar {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;;
+    background-color: rgb(194, 143, 151);
 }
+
+/*.nav-link {
+    color: black;
+}*/
+
+.logo {
+    height: 50px;
+    padding: 10px;
+    will-change: filter;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #04040aaa);
+  }
 
 .card-header {
-    background-color: #ddbea9;
+    background-color: rgb(194, 143, 151);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.card-body-home {
+    width: 115px;
+    height: 350px;
+    border-radius: 4px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.title {
-    color: black;
-    text-align: center;
-    font-family: monospace;
-}*/
+.card-body-home {
+    margin-top: 15px;
+    margin: 10px;
+}
+
+.cart {
+    width: 350px;
+    height: 450px;
+    justify-content: space-around;
+}
+
+.card-body-cart {
+    width: 150px;
+    height: 250px;
+    justify-content: center;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+
+img {
+    width: 210px;
+    height: 150px;
+    border-radius: 4px;
+    justify-content: center;
+    margin: 10px;
+
+}
 

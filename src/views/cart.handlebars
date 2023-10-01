@@ -6,20 +6,22 @@
 <div class="d-flex flex-wrap justify-content-center">
     {{#each cart.products}}
     <div class='col-sm-3     mx-2 my-3 r'>
-        <div class="card w-100 mt-5">
-            <div class="card-header text-white bg-dark">
-                {{id_product.title}}
-            </div>
-            <div class="card-body">
-                <img src={{id_product.thumbnail}}alt="Products img">
-                <br />
-                Price: $ {{id_product.price}}
-                <br />
-                Stock : {{id_product.stock}}
-                <br />
-                Quantity : {{quantity}}
-                <br />
-                <br />
+        <div class="cart">
+            <div class="card w-150 mt-5">
+                <div class="card-header text-white bg-dark">
+                    {{id_product.title}}
+                </div>
+                <div class="card-body-cart">
+                    <img src={{id_product.thumbnail}}alt="Products img">
+                    <br />
+                    Price: $ {{id_product.price}}
+                    <br />
+                    Stock : {{id_product.stock}}
+                    <br />
+                    Quantity : {{quantity}}
+                    <br />
+                    <br />
+                </div>
                 <form class="d-flex " action="/api/carts/{{../cart._id}}/product/{{id_product._id}}?_method=PUT"
                     method="POST">
                     <div class="input-group mb-3">
@@ -28,15 +30,20 @@
                         <input type="number" name="quantity" class="form-control" aria-describedby="button-addon1"
                             required>
                 </form>
+                <div class="button-cart">
+                    <div class="card-body pb-0 pt-2 d-flex gap-1">
+                        <form action="/api/products/" method="get">
+                            <button class="btn btn-outline-primary btn-sm mb-3 px-5" type="submit">Seguir
+                                comprando</button>
+                        </form>
+                        <form action="/api/carts/{{../cart._id}}/product/{{id_product._id}}?_method=DELETE"
+                            method="POST">
+                            <button class="btn btn-outline-danger btn-sm mb-3 px-5" type="submit">Eliminar
+                                producto</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card-body pb-0 pt-2 d-flex gap-1">
-            <form action="/api/products/" method="get">
-                <button class="btn btn-outline-primary btn-sm mb-3 px-5" type="submit">Seguir comprando</button>
-            </form>
-            <form action="/api/carts/{{../cart._id}}/product/{{id_product._id}}?_method=DELETE" method="POST">
-                <button class="btn btn-outline-danger btn-sm mb-3 px-5" type="submit">Eliminar producto</button>
-            </form>
         </div>
     </div>
 </div>

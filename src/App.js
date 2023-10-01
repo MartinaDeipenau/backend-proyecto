@@ -105,6 +105,7 @@ app.use(express.json()) // Me permite ejecutar json en la app
 app.use(express.urlencoded({ extended: true })) // Me permite poder realizar consultas en (req.query)
 app.use(loggerMiddleware)
 
+
 const myServer = app.listen(PORT, () => {
     loggerDev.info(`Server on port ${PORT}`)
 })
