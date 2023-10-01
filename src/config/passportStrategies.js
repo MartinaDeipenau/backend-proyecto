@@ -45,7 +45,7 @@ const initializePassport = () => {
             {
                 clientID: 'Iv1.00e76cd60a4f4244',
                 clientSecret: process.env.GITHUB_SECRET,
-                callbackURL: 'http://localhost:4000/api/register/githubcallback',
+                callbackURL: 'https://ecommercemd.onrender.com/api/register/githubcallback',
             },
             async (accessToken, refreshToken, profile, done) => {
                 try {
